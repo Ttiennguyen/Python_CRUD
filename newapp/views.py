@@ -8,6 +8,7 @@ def index(request):
 
     if query:
         mem = Member.objects.filter(
+            Q(email__icontains=query) |  # Case-insensitive search for first name
             Q(firstname__icontains=query) |  # Case-insensitive search for first name
             Q(lastname__icontains=query) |  # Case-insensitive search for last name
             Q(country__icontains=query)  # Case-insensitive search for country
@@ -28,8 +29,9 @@ def addrec(request):
     e=request.POST['email']
     a=request.POST['age']
     s=request.POST['salary']
+    i=request.POST['image']
     # Tạo đối tượng `Member` mới với thông tin này và lưu vào cơ sở dữ liệu
-    mem=Member(firstname=x,lastname=y,country=z,email=e,age=a,salary=s)
+    mem=Member(firstname=x,lastname=y,country=z,email=e,age=a,salary=s,image=i)
     mem.save()
     return redirect("/")
 
@@ -49,6 +51,7 @@ def uprec(request,id):
     e = request.POST['email']
     a = request.POST['age']
     s = request.POST['salary']
+    i = request.POST['image']
     mem=Member.objects.get(id=id)
     mem.firstname=x
     mem.lastname=y
@@ -56,6 +59,7 @@ def uprec(request,id):
     mem.email=e
     mem.age=a
     mem.salary=s
+    mem.image=i
     mem.save()
     return redirect("/")
 
