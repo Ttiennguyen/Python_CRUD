@@ -6,45 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
 
 <body>
-    <div class="container">
+    <div class="container mt-4">
         <h1>Members</h1>
         <!-- Search form -->
-        <form method="get" action="{% url 'index' %}">
-            <input type="text" name="q" placeholder="Search...">
-            <button type="submit">Search</button>
+        <form class="form-inline mb-3" method="get" action="{% url 'index' %}">
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search...">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
-      <table id="customers" border="1">
-            <thead>
+        <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
                 <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Country</th>
-                <th colspan="2" id="mid">Action</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th colspan="2" class="text-center">Action</th>
             </thead>
             {% for x in mem %}
-                    <tr>
-                        <td>{{x.id}}</td>
-                        <td>{{x.firstname}}</td>
-                        <td>{{x.lastname}}</td>
-                        <td>{{x.country}}</td>
-                        <td>
-                            <a href="update/{{x.id}}"><button id="up">update</button></a>
-                        </td>
-                        <td>
-                            <a href="delete/{{x.id}}"><button id="del">delete</button></a>
-                        </td>
-                    </tr>
+            <tr>
+                <td>{{x.id}}</td>
+                <td>{{x.firstname}}</td>
+                <td>{{x.lastname}}</td>
+                <td>{{x.country}}</td>
+                <td>{{x.age}}</td>
+                <td>{{x.email}}</td>
+                <td>{{x.salary}}$</td>
+                <td class="text-center">
+                    <a href="update/{{x.id}}" class="btn btn-primary btn-sm">Update</a>
+                </td>
+                <td class="text-center">
+                    <a href="delete/{{x.id}}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
             {% endfor %}
         </table>
         <br><br>
-        <a href="{% url 'add' %}"><button id="new3">Add Member</button></a>
+        <a href="{% url 'add' %}" class="btn btn-success">Add Member</a>
     </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

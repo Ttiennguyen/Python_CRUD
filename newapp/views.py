@@ -21,10 +21,15 @@ def add(request):
     return render(request,'add.html')
 
 def addrec(request):
+    # Lấy thông tin từ dữ liệu POST gửi từ biểu mẫu thêm thành viên
     x=request.POST['first']
     y=request.POST['last']
     z=request.POST['country']
-    mem=Member(firstname=x,lastname=y,country=z)
+    e=request.POST['email']
+    a=request.POST['age']
+    s=request.POST['salary']
+    # Tạo đối tượng `Member` mới với thông tin này và lưu vào cơ sở dữ liệu
+    mem=Member(firstname=x,lastname=y,country=z,email=e,age=a,salary=s)
     mem.save()
     return redirect("/")
 
@@ -41,10 +46,16 @@ def uprec(request,id):
     x=request.POST['first']
     y=request.POST['last']
     z=request.POST['country']
+    e = request.POST['email']
+    a = request.POST['age']
+    s = request.POST['salary']
     mem=Member.objects.get(id=id)
     mem.firstname=x
     mem.lastname=y
     mem.country=z
+    mem.email=e
+    mem.age=a
+    mem.salary=s
     mem.save()
     return redirect("/")
 
