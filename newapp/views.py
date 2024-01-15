@@ -2,7 +2,12 @@ from django.shortcuts import redirect, render
 from .models import Member, Login
 from django.db.models import Q  # Import Q for complex queries
 
+# đưa toàn bộ dữ liệu lên
+# def index(request):
+#     mem= Member.objects.all()
+#     return render(request, 'index.html', {'mem': mem})
 
+#đưa toàn bộ dữ liệu có thêm phần tìm kiếm
 def index(request):
     query = request.GET.get('q', '')  # Get the search query from the URL parameter 'q'
 
@@ -62,7 +67,8 @@ def uprec(request,id):
     mem.image=i
     mem.save()
     return redirect("/")
-#####
+
+##### Phần login
 def indexlogin(request):
     log = Login.objects.all()
     return render(request, 'indexlogin.html', {'log': log})
@@ -84,16 +90,8 @@ def deleteacc(request,id):
     return redirect("/indexlogin")
 
 def loginview(request):
-
-    # u = request.GET['username']
-    # p = request.GET['password']
     return render(request, 'login.html')
-    # log = Login.objects.all()
-    #
-    # if log.username==u & log.password==p:
-    #     return redirect("/indexlogin")
-    # else:
-    #     return redirect("/loginview")
+#ktr pass và tk
 def logincheck(request):
 
     u = request.POST['username']

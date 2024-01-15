@@ -9,6 +9,7 @@ class Member(models.Model):
     salary = models.IntegerField(default=0,null=True)
     image = models.CharField(max_length=50,null=True)
 
+#class vs table của login cần thì add vào
 class Login(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
