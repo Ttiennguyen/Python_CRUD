@@ -8,3 +8,7 @@ class Member(models.Model):
     age = models.IntegerField(default=0,null=True)
     salary = models.IntegerField(default=0,null=True)
     image = models.CharField(max_length=50,null=True)
+
+class Login(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
